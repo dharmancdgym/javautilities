@@ -28,10 +28,27 @@ import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.client.RestTemplate;
+import org.springframework.http.HttpEntity;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.client.RestTemplate;
+import com.fasterxml.jackson.databind.DeserializationFeature;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import org.json.JSONArray;
+import org.json.JSONObject;
+import java.util.Arrays;
+import java.util.List;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import com.embedsample.appownsdata.models.EmbedToken;
+import com.embedsample.appownsdata.config.Config;
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.JsonMappingException;
 
 /**
  * Service with helper methods to get report's details and multi-resource embed token
  */
+
 public class PowerBIService {
 	
 	static final Logger logger = LoggerFactory.getLogger(PowerBIService.class);
@@ -406,6 +423,7 @@ public class PowerBIService {
 	 * @throws JsonProcessingException 
 	 * @throws JsonMappingException 
 	 */
+
 	public static EmbedToken getEmbedToken(String accessToken, List<String> reportIds, List<String> datasetIds, String... targetWorkspaceIds) throws JsonMappingException, JsonProcessingException {
 
 		// Note: This method is an example and is not consumed in this sample app
@@ -425,6 +443,28 @@ public class PowerBIService {
 		for (String datasetId : datasetIds) {
 			jsonDatasets.put(new JSONObject().put("id", datasetId));
 		}
+
+		/*
+		 * var headers = new HttpHeaders();
+headers.put("Content-Type", List.of("application/json"));
+headers.put("Authorization", List.of("Bearer " + accessToken));
+
+// Add dataset id in body
+var jsonDatasets = new JSONArray();
+for (var datasetId : datasetIds) {
+    jsonDatasets.put(new JSONObject().put("id", datasetId));
+}
+
+HttpHeaders headers = new HttpHeaders();
+headers.put("Content-Type", List.of("application/json"));
+headers.put("Authorization", List.of("Bearer " + accessToken));
+
+// Add dataset id in body
+JSONArray jsonDatasets = new JSONArray();
+datasetIds.stream().forEach(datasetId -> jsonDatasets.put(new JSONObject().put("id", datasetId)));
+		 * 
+		 * 
+		 */
 		
 		// Add report id in body
 		JSONArray jsonReports = new JSONArray();

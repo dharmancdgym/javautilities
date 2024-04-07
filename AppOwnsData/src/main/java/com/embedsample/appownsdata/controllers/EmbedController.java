@@ -29,8 +29,10 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.client.HttpClientErrorException;
 import org.springframework.web.servlet.ModelAndView;
+// write all the junit test casses for the EmbedController class  and test all the methods in the class   and write  the test cases in the EmbedControllerTest class  
 
-@Controller
+
+@Controller 
 public class EmbedController {
 
 	static final Logger logger = LoggerFactory.getLogger(EmbedController.class);
@@ -73,6 +75,7 @@ public class EmbedController {
 			Thread.currentThread().interrupt();
 			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(interruptedEx.getMessage());
 		}
+		
 
 		// Get required values for embedding the report
 		try {
@@ -82,6 +85,8 @@ public class EmbedController {
 
 			// Convert ArrayList of EmbedReport objects to JSON Array
 			JSONArray jsonArray = new JSONArray();
+			// reportEmbedConfig.embedReports.stream().map(EmbedReport::getJSONObject).forEach(jsonArray::put);
+
 			for (int i = 0; i < reportEmbedConfig.embedReports.size(); i++) {
 				jsonArray.put(reportEmbedConfig.embedReports.get(i).getJSONObject());
 			}

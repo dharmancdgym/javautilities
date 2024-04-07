@@ -23,7 +23,8 @@ import com.microsoft.aad.msal4j.UserNamePasswordParameters;
 /**
  * Service to authenticate using MSAL
  */
-public class AzureADService {
+
+public class AzureADService  {
 	static final Logger logger = LoggerFactory.getLogger(AzureADService.class);
 	
 	// Prevent instantiation 
